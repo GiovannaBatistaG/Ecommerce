@@ -1,6 +1,6 @@
 <template>
 
-  <div class="max-w-7xl mx-auto p-6 grid lg:grid-cols-2 gap-6">
+  <div class="max-w-7xl mx-auto p-6 grid lg:grid-cols-2 gap-6 mt-10">
     <div class="flex justify-center p-8 items-center">
       <img :src="product.thumbnail" class="border-2 border-black-500 w-full max-w-lg" />
     </div>
