@@ -1,16 +1,17 @@
 <template>
 
-  <div>
+  <div class="flex flex-col min-h-screen">
     <Navbar />
+    <main class="flex-grow">
       <router-view/>
-      <Bg />
-    </div>
-    
+    </main>
+    <Footer />
+  </div>
 </template>
 
 
 <script setup>
 import Navbar from './components/NavbarComponents.vue';
-import Bg from './components/BgComponents.vue'
+import Footer from './components/FooterComponents.vue';
 
-</script>
+</script> 

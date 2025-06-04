@@ -1,40 +1,34 @@
 <template>
-  <div
-    :class="['fixed top-0 left-0 w-full z-50 transition-transform duration-500', isVisible ? 'translate-y-0' : '-translate-y-full']"
-  >
-    <nav class="text-indigo-900 py-4 pt-8 flex justify-center items-center">
-      <ul class="flex gap-6 text-lg font-2xl font-semibold bg-gray-200 p-1 pl-3 pr-3 rounded-full">
-        <li>
-          <router-link to="/" class="hover:text-indigo-600">Início</router-link>
-        </li>
-        <li>
-          <router-link to="/about" class="hover:text-indigo-600">Sobre</router-link>
-        </li>
-        <li>
-          <router-link to="/contact" class="hover:text-indigo-600">Contato</router-link>
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <nav class="w-full bg-white border-b border-gray-200 fixed z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <div class="flex items-center space-x-8">
+        <div class="hidden md:flex space-x-6 text-x text-black">
+          <router-link :to="{name: 'home'}" class="hover:text-gray-500">Inicio</router-link>
+          <router-link :to="{name: 'categorias'}" class="hover:text-gray-500">Categorias</router-link>
+
+        </div>
+      </div>
+      <div class="flex items-center space-x-4 ml-2">
+        <button><i class="fa-regular fa-heart text-xl"></i></button>
+        <button><i class="fa-solid fa-bag-shopping text-xl"></i></button>
+        <button class="md:hidden" @click="isOpen = !isOpen">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div v-if="isOpen" class="md:hidden border-t border-gray-200">
+      <div class="px-4 py-2 flex flex-col space-y-2 text-sm font-medium z-40">
+          <router-link :to="{name: 'home'}" class="hover:text-gray-500">Inicio</router-link>
+          <router-link :to="{name: 'categorias'}" class="hover:text-gray-500">Categorias</router-link>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const isVisible = ref(true)
-let lastScroll = window.scrollY
-
-const handleScroll = () => {
-  const currentScroll = window.scrollY
-  isVisible.value = currentScroll < lastScroll || currentScroll <= 0
-  lastScroll = currentScroll
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+import { ref } from 'vue'
+const isOpen = ref(false)
 </script>
+
