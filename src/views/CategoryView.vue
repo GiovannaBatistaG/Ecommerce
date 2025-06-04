@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white text-gray-900">
     <section class="max-w-7xl mx-auto py-12 px-4">
-      <!-- Botão para abrir a Sidebar em telas menores -->
+    
       <div class="fixed md:hidden z-0 mt-6 text-left">
         <button
           @click="isSidebarOpen = true"
@@ -13,7 +13,7 @@
       </div>
 
       <div class="flex flex-col md:flex-row gap-8">
-        <!-- Sidebar de Categorias -->
+       
         <aside :class="sidebarClasses">
           <div class="flex justify-between items-center md:block">
             <h3 class="text-xl font-semibold mb-0 md:mb-4 text-gray-800">Categorias</h3>
@@ -48,7 +48,7 @@
           </ul>
         </aside>
 
-        <!-- Conteúdo Principal: Produtos e Busca -->
+    
         <main class="w-full md:w-3/4 lg:w-4/5">
           <h2 class="text-3xl md:text-4xl mb-8 text-center md:text-left font-bold text-gray-800 mt-10">Nossos Produtos</h2>
 
@@ -95,7 +95,6 @@
             </div>
           </div>
 
-      <!-- Controles de Paginação (Primeira ocorrência - será mantida) -->
       <div v-if="!loading && !error && products.length > 0 && totalPages > 1" class="mt-12 flex justify-center items-center space-x-4">
         <button
           @click="prevPage"
@@ -134,14 +133,14 @@ import { useRoute, useRouter } from 'vue-router';
 
 const products = ref([]);
 const loading = ref(true);
-const error = ref(null); // Definido dentro do script setup
-const searchTerm = ref(''); // Definido dentro do script setup
+const error = ref(null);
+const searchTerm = ref(''); 
 
-const selectedCategory = ref(null); // Slug da categoria selecionada na sidebar
+const selectedCategory = ref(null);
 const allCategories = ref([]);
 const debounceTimer = ref(null);
 const currentPage = ref(1);
-const limit = ref(12); // Quantidade de produtos por página
+const limit = ref(12); 
 const totalProducts = ref(0);
 
 const isSidebarOpen = ref(false);
@@ -165,13 +164,13 @@ const displayCategories = computed(() => {
   return allCategories.value.map(slug => ({
     name: slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
     slug: slug
-  })).sort((a, b) => a.name.localeCompare(b.name)); // Ordena alfabeticamente
+  })).sort((a, b) => a.name.localeCompare(b.name)); 
 });
 
 async function fetchAllCategories() {
   try {
     const response = await axios.get('https://dummyjson.com/products/categories');
-    // A API dummyjson já retorna slugs de categoria em minúsculas.
+
     allCategories.value = response.data.map(category => typeof category === 'string' ? category : category.name);
   } catch (e) {
     console.error("Falha ao buscar lista de categorias:", e);
@@ -189,22 +188,21 @@ async function fetchProducts() {
 
     const currentSearchTerm = searchTerm.value.trim();
 
-    // Se uma categoria está selecionada na sidebar, ela tem prioridade.
+  
     if (selectedCategory.value) {
       baseUrl += `/category/${selectedCategory.value}`;
     } else if (currentSearchTerm !== '') {
-      // Se nenhuma categoria da sidebar estiver selecionada, usa o input de busca.
+
       const currentSearchTermLower = currentSearchTerm.toLowerCase();
       if (allCategories.value.includes(currentSearchTermLower)) {
-        // Se o termo de busca corresponde a um slug de categoria, busca por essa categoria.
+      
         baseUrl += `/category/${currentSearchTermLower}`;
       } else {
-        // Senão, faz uma busca genérica.
         baseUrl += `/search`;
         params.append('q', currentSearchTerm);
       }
     }
-    // Se selectedCategory e currentSearchTerm estiverem vazios, lista todos os produtos (paginados).
+  
 
     const response = await axios.get(baseUrl, { params });
     products.value = response.data.products;
@@ -251,14 +249,12 @@ function clearSearchInput() {
   if (selectedCategory.value) {
     selectedCategory.value = null;
   }
-  // O watch(searchTerm) já vai acionar a busca após o debounce.
+
 }
 
 function selectCategoryFromSidebar(categorySlug) {
   selectedCategory.value = categorySlug;
   searchTerm.value = categorySlug ? displayCategories.value.find(c => c.slug === categorySlug)?.name || categorySlug : '';
-  // Atualiza a URL para refletir a categoria selecionada
-  // A rota 'categorias' é usada aqui, conforme definido em seu router/index.js
   router.push({ name: 'categorias', query: categorySlug ? { category: categorySlug } : {} });
   handleSearchImmediately();
 }
@@ -280,22 +276,22 @@ function prevPage() {
 onMounted(async () => {
   await fetchAllCategories();
 
-  // Verifica se há um parâmetro 'category' ou 'q' na URL ao carregar
+
   if (route.query.category) {
     const categoryFromQuery = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category;
     if (allCategories.value.includes(categoryFromQuery)) {
       selectedCategory.value = categoryFromQuery;
-      // Atualiza o searchTerm para consistência visual no input
+      
       searchTerm.value = displayCategories.value.find(c => c.slug === categoryFromQuery)?.name || categoryFromQuery;
     }
   } else if (route.query.q) {
     searchTerm.value = Array.isArray(route.query.q) ? route.query.q[0] : route.query.q;
-    selectedCategory.value = null; // Garante que a busca por 'q' anule a seleção da sidebar
+    selectedCategory.value = null; 
   }
   performSearch(); // Realiza a busca inicial
 });
 
-// Observa mudanças nos parâmetros de query da URL para 'category' e 'q'
+
 watch(() => route.query, (newQuery, oldQuery) => {
   let needsSearch = false;
   const newCategoryQuery = Array.isArray(newQuery.category) ? newQuery.category[0] : newQuery.category;
@@ -313,7 +309,7 @@ watch(() => route.query, (newQuery, oldQuery) => {
     searchTerm.value = newSearchQuery;
     selectedCategory.value = null;
     needsSearch = true;
-  } else if (!newCategoryQuery && !newSearchQuery) { // Se ambos foram removidos da URL
+  } else if (!newCategoryQuery && !newSearchQuery) { 
     if (selectedCategory.value !== null || searchTerm.value !== '') {
         selectedCategory.value = null;
         searchTerm.value = '';
@@ -324,6 +320,5 @@ watch(() => route.query, (newQuery, oldQuery) => {
   if(needsSearch) {
     performSearch();
   }
-}, { deep: true }); // deep: true para observar mudanças em objetos de query
-
+}, { deep: true }); 
 </script>
