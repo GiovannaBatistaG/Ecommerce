@@ -2,28 +2,36 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+# Funcionalidades do Site:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+O site tem como finalidade representar um ecommerce com categorias de produtos, nosso site foi composto por uma pagina de inicio, com produtos "destaques" e também o que estaria em oferta, infelizmente a API não possui uma expecificação de preço promossional em então utilizamos um calculo para aparecer o valor reduzido:
 
-## Customize configuration
+[image](https://github.com/user-attachments/assets/80bdb171-f64f-47db-9bb7-22a9d5de2cfe)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Ele possui tambmé a pagina de produtos, que contem as seguintes funcionalidades:
 
-## Project Setup
+Paginação de todos os produtos:
 
-```sh
-npm install
-```
+![image](https://github.com/user-attachments/assets/45dbe87f-1007-4ef8-88f5-e88cf934d07c)
 
-### Compile and Hot-Reload for Development
+Filtro por categoria:
 
-```sh
-npm run dev
-```
+![image](https://github.com/user-attachments/assets/1b29223f-cd97-41da-87ad-f8233ace59a5)
 
-### Compile and Minify for Production
+Busca por nome:
 
-```sh
-npm run build
-```
+![image](https://github.com/user-attachments/assets/e2abd872-a8ff-4b80-a4f9-cae79d625c84)
+
+E mais Informações do produro como: Descrição e estoque:
+
+![image](https://github.com/user-attachments/assets/3faf2dc2-c259-4f4a-8176-637706210ea6)
+
+Todo o Site está em mobile também
+
+https://www.youtube.com/watch?v=znQAYTEqvfY
+
+
+
+
+
+
