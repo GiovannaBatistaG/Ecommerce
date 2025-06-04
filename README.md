@@ -6,7 +6,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 O site tem como finalidade representar um ecommerce com categorias de produtos, nosso site foi composto por uma pagina de inicio, com produtos "destaques" e também o que estaria em oferta, infelizmente a API não possui uma expecificação de preço promossional em então utilizamos um calculo para aparecer o valor reduzido:
 
-[image](https://github.com/user-attachments/assets/80bdb171-f64f-47db-9bb7-22a9d5de2cfe)
+![image](https://github.com/user-attachments/assets/80bdb171-f64f-47db-9bb7-22a9d5de2cfe)
 
 Ele possui tambmé a pagina de produtos, que contem as seguintes funcionalidades:
 
@@ -28,7 +28,7 @@ E mais Informações do produro como: Descrição e estoque:
 
 Todo o Site está em mobile também
 
-https://www.youtube.com/watch?v=znQAYTEqvfY
+https://www.youtube.com/watch?v=LlRYuMaNRi8
 
 
 
